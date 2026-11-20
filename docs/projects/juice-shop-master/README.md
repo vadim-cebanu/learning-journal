@@ -29,7 +29,7 @@ This project documents a set of security challenges solved in the **OWASP Juice 
 | Challenge | Category | Documentation | Video |
 |-----------|----------|---------------|-------|
 | Login Admin (SQL Injection) | Injection | [Read](./challenge-1-login-admin/README.md) | [▶️ Loom](https://www.loom.com/share/69d729838c7548a5b23fa5d5cdb462a3) |
-| DOM XSS | Cross-Site Scripting (XSS) | [Read](./challenge-2-DOM XSS/README.md | _add link_ |
+| DOM XSS | Cross-Site Scripting (XSS) | [Read](./challenge-2-dom-xss/README.md) | _add link_ |
 
 ### Login Admin (SQL Injection)
 
