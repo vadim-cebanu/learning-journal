@@ -26,7 +26,18 @@ an infinite loop.
 
 ---
 
-## 2. Payload
+## 2. Root Cause
+
+XML parsers can be told to resolve *external entities* — references to files
+or URLs outside the document. The server parses uploaded XML with this feature
+turned on (`noent: true`) and without restricting DTDs, so an attacker controls
+what the server reads.
+
+---
+
+## 3. Proof of Concept
+
+### Payload
 
 `xxe_dos.xml`:
 
@@ -38,6 +49,8 @@ an infinite loop.
 <foo>&xxe;</foo>
 ```
 
+### How it works
+
 - `<!DOCTYPE foo [ ... ]>` declares a Document Type Definition.
 - `<!ENTITY xxe SYSTEM "file:///dev/random">` defines an **external entity**
   that resolves to the system file `/dev/random`.
@@ -47,7 +60,7 @@ an infinite loop.
 
 ---
 
-## 3. Exploitation
+## 4. Exploitation
 
 1. Log in to Juice Shop (any account).
 2. Open **Customer Feedback → File Complaint** (`/#/complain`).
@@ -56,25 +69,25 @@ an infinite loop.
 5. **Submit.**
 
 ### Expected result
+
 - The response is **delayed ~2 seconds** (the parser is stuck on `/dev/random`).
 - The server returns **HTTP 503** (processing timed out).
 - The **XXE DoS** challenge is marked solved on the Score Board.
 
 ---
 
-## 4. Why it works
+## 5. Why It Works
 
-XML parsers can be told to resolve *external entities* — references to files
-or URLs outside the document. When this is left enabled on untrusted input, an
-attacker controls what the server reads. Pointing it at an infinite source
-(`/dev/random`) turns a harmless-looking XML upload into a denial-of-service.
+When external entity resolution is left enabled on untrusted input, pointing
+it at an infinite source (`/dev/random`) turns a harmless-looking XML upload
+into a denial-of-service.
 
 The same primitive, pointed at `/etc/passwd` instead, leaks server files
 (the separate *XXE Data Access* challenge).
 
 ---
 
-## 5. Remediation
+## 6. Remediation
 
 :::tip Key takeaway
 Validate and restrict untrusted input on the server side; never rely on the client or on outdated components.
@@ -88,7 +101,7 @@ Validate and restrict untrusted input on the server side; never rely on the clie
 
 ---
 
-## 6. Impact
+## 7. Impact
 
 :::danger Why it matters
 See the consequences below: this flaw can seriously affect the availability, integrity or confidentiality of the application.
