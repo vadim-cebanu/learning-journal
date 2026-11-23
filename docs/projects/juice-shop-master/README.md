@@ -1,79 +1,73 @@
 # Juice Shop Master
 
-This project documents a set of security challenges solved in the **OWASP Juice Shop**, a deliberately insecure web application used for security training. For each selected challenge it explains the vulnerability, how it was exploited, the risks it poses, and how it should be fixed. All work was performed locally against a personal Juice Shop instance.
+This project documents a set of security challenges solved in the **OWASP Juice Shop**, a deliberately insecure web application used for security training. For each challenge it explains the vulnerability, how it was exploited, the risks it poses, and how it should be fixed.
 
-> **Disclaimer:** The entire content of this documentation is for **educational purposes only**. All attacks were carried out on a local, personal OWASP Juice Shop instance, using no real personal data.
+> Target application: [**OWASP Juice Shop**](https://github.com/juice-shop/juice-shop) (open source)
 
-## Table of Contents
+:::caution Educational purposes only
+All attacks were carried out on a local, personal OWASP Juice Shop instance, using no real personal data. Never test these techniques on systems you do not own or have explicit permission to test.
+:::
 
-- [Quickstart](#quickstart)
-- [Challenges](#challenges)
-  - [Login Admin (SQL Injection)](#login-admin-sql-injection)
-  - [DOM XSS](#dom-xss)
-- [Documentation Structure](#documentation-structure)
+## Prerequisites
+
+- **Node.js ≥ 20** and **npm**
+- A modern browser with DevTools
+- (Optional) **Burp Suite** for intercepting requests
 
 ## Quickstart
 
-1. Start your local OWASP Juice Shop:
+1. Clone & start the official OWASP Juice Shop:
    ```bash
+   git clone https://github.com/juice-shop/juice-shop
    cd juice-shop
+   npm install
    npm start
    ```
 2. Open the application at `http://localhost:3000`.
-3. Open the folder of each challenge below for the full write-up and its video link.
+3. Open the folder of each challenge below for the full write-up.
+
+## Tools
+
+- OWASP Juice Shop (run locally)
+- Browser DevTools (Console / Network)
+- Burp Suite (request interception)
+- Python 3 (crafting payloads — malicious ZIP, XML, YAML)
 
 ## Challenges
 
-> The submission covers challenges from **different categories** (not all from the same area).
+| # | Challenge | Category | Difficulty | Documentation | Video |
+|---|-----------|----------|------------|---------------|---------|
+| 1 | Arbitrary File Write | Vulnerable Components (Zip Slip) | ★★★★ | [Read](./challenge-1-arbitrary-file-write/README.md) | [Loom](https://www.loom.com/share/063c85fb6c1540f6a577264bdb93f4b2) |
+| 2 | XXE DoS | XXE (XML External Entities) | ★★★★★ | [Read](./challenge-2-xxe-dos/README.md) | [Loom](https://www.loom.com/share/8af69a7afaa340f79e68b3cfafea2ece) |
+| 3 | Memory Bomb | Insecure Deserialization | ★★★★ | [Read](./challenge-3-memory-bomb/README.md) | [Loom](https://www.loom.com/share/e272963d3fdd4440bab5c2a927459de7) |
+| 4 | Server-side XSS Protection | XSS | ★★★★ | [Read](./challenge-4-server-side-xss-protection/README.md) | [Loom](https://www.loom.com/share/a5a6d2b447434e4096e266e9457c5bd8) |
 
-| Challenge | Category | Documentation | Video |
-|-----------|----------|---------------|-------|
-| Login Admin (SQL Injection) | Injection | [Read](./challenge-1-login-admin/README.md) | [Loom](https://www.loom.com/share/69d729838c7548a5b23fa5d5cdb462a3) |
-| DOM XSS | Cross-Site Scripting (XSS) | [Read](./challenge-2-dom-xss/README.md) | [Loom](https://www.loom.com/share/041c116694414bc996fb86d010a4ebe1)  |
-
-### Login Admin (SQL Injection)
-
-**Category:** Injection (OWASP Top 10 — A03:2021)
-
-The login form builds its SQL query directly from user input. By injecting a crafted
-value into the email field, the password check is bypassed and the attacker logs in as
-the administrator without any valid password.
-
-**Why it is dangerous:** SQL Injection is one of the most severe web vulnerabilities. An
-attacker can bypass authentication and take over any account (including the admin), and
-can read, modify or delete arbitrary data in the database — for example dumping every
-user's credentials. Because it reaches the database directly, a single injectable field
-can expose the entire data of the application.
-
-➡️ Full write-up: [challenge-1-login-admin](./challenge-1-login-admin/README.md)
-
-### DOM XSS
-
-**Category:** Cross-Site Scripting (XSS) (OWASP Top 10 — A03:2021)
-
-The search field inserts the user's input into the page as raw HTML, because the
-application disables Angular's built-in sanitization. An HTML/JavaScript payload typed
-into the search box is therefore executed in the browser (a DOM-based XSS).
-
-**Why it is dangerous:** With XSS an attacker can run arbitrary JavaScript in the victim's
-browser — stealing session cookies and impersonating the user, performing actions in their
-name, or redirecting them to a malicious page. Because the code runs with the victim's
-identity, a single injectable output can fully compromise their session.
-
-➡️ Full write-up: [challenge-2-dom-xss](./challenge-2-dom-xss/README.md)
+:::info
+Challenges 1–3 all abuse the same *File Complaint* upload endpoint, each through a different file type (ZIP, XML, YAML) — a good illustration of how one weak endpoint enables very different attacks.
+:::
 
 ## Documentation Structure
 
 ```
 juice-shop-master/
-├── README.md                     # this file: description, ToC, quickstart, challenge overview
-├── _category_.yaml               # Docusaurus sidebar config for this project
-├── challenge-1-login-admin/
-│   ├── README.md                 # full challenge documentation
-│   ├── _category_.yaml
-│   └── images/                   # screenshots (fix.png, fix1.png … fix4.png)
-└── challenge-2-dom-xss/
-    ├── README.md                 # full challenge documentation
-    ├── _category_.yaml
-    └── images/                   # screenshots (fix.png, fix1.png … fix4.png)
+├── README.md
+├── _category_.yaml
+├── challenge-1-arbitrary-file-write/
+│   └── README.md
+├── challenge-2-xxe-dos/
+│   └── README.md
+├── challenge-3-memory-bomb/
+│   └── README.md
+├── challenge-4-server-side-xss-protection/
+    └── README.md
+
 ```
+
+## References
+
+- OWASP Juice Shop (source): https://github.com/juice-shop/juice-shop
+- Pwning OWASP Juice Shop (companion guide): https://pwning.owasp-juice.shop
+- OWASP Top 10: https://owasp.org/www-project-top-ten/
+
+---
+
