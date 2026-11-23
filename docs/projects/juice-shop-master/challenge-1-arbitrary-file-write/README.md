@@ -25,14 +25,16 @@ This class of bug is known as **Zip Slip**.
 
 ---
 
-## 2. Vulnerable Flow
+## 2. Root Cause
+
+The server builds the destination path from the name stored inside the archive:
 
 ```
 uploads/complaints/  +  <name stored inside the zip>
 ```
 
-The server trusts the name coming from the archive and only checks that the
-final path stays "somewhere inside the project" — it never rejects `..`.
+It trusts that name and only checks that the final path stays "somewhere inside
+the project" — it never rejects `..`.
 
 A crafted entry name:
 
@@ -51,9 +53,9 @@ uploads/complaints/../../ftp/legal.md
 
 ---
 
-## 3. Exploitation
+## 3. Proof of Concept
 
-### Step 1 — Build the malicious archive
+### Payload — the malicious archive
 
 Normal archivers (7-Zip, Windows Explorer, `unzip`) strip `../` from entry
 names (anti-Zip-Slip protection), so the archive is crafted with Python, whose
@@ -72,7 +74,7 @@ with zipfile.ZipFile("exploit.zip", "w") as z:
 python3 make_zip.py
 ```
 
-### Step 2 — Verify the payload
+### Verifying the payload
 
 ```bash
 unzip -l exploit.zip
@@ -84,7 +86,9 @@ Expected output lists the traversal path:
 ../../ftp/legal.md
 ```
 
-### Step 3 — Deliver it
+---
+
+## 4. Exploitation
 
 1. Log in to Juice Shop (any account).
 2. Open **Customer Feedback → File Complaint** (`/#/complain`).
@@ -94,13 +98,11 @@ Expected output lists the traversal path:
 
 The server extracts the archive and overwrites `ftp/legal.md`.
 
-### Step 4 — Confirm
+### Expected result
 
 ```bash
 cat ftp/legal.md
 ```
-
-Output:
 
 ```
 Hacked by Vadim
@@ -110,7 +112,7 @@ The **Arbitrary File Write** challenge is now solved on the Score Board.
 
 ---
 
-## 4. Why a ZIP (and not a direct upload)?
+## 5. Why It Works
 
 A directly uploaded file cannot carry `../` in its name — the browser and OS
 block it. Inside a ZIP, however, the entry name is just a string. Juice Shop
@@ -119,7 +121,7 @@ traversal survives.
 
 ---
 
-## 5. Remediation
+## 6. Remediation
 
 :::tip Key takeaway
 Validate and restrict untrusted input on the server side; never rely on the client or on outdated components.
@@ -140,7 +142,7 @@ if not target.startswith(resolve(destDir) + os.sep):
 
 ---
 
-## 6. Impact
+## 7. Impact
 
 :::danger Why it matters
 See the consequences below: this flaw can seriously affect the availability, integrity or confidentiality of the application.
