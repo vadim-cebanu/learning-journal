@@ -26,7 +26,7 @@ The file on disk is a few hundred bytes. In memory it becomes gigabytes.
 
 ---
 
-## 2. Root cause
+## 2. Root Cause
 
 The handler reads the whole uploaded buffer and feeds it straight to the YAML
 parser:
@@ -42,7 +42,11 @@ structures.
 
 ---
 
-## 3. The payload (`bomb.yml`)
+## 3. Proof of Concept
+
+### Payload
+
+`bomb.yml`:
 
 ```yaml
 a: &a ["lol","lol","lol","lol","lol","lol","lol","lol","lol"]
@@ -56,7 +60,7 @@ h: &h [*g,*g,*g,*g,*g,*g,*g,*g,*g]
 i: &i [*h,*h,*h,*h,*h,*h,*h,*h,*h]
 ```
 
-How it detonates:
+### How it detonates
 
 - `&a` defines a list of 9 strings.
 - `&b` references `a` nine times → 9 × 9 = 81 strings.
@@ -68,7 +72,7 @@ The file is ~342 bytes; the parsed structure is gigabytes.
 
 ---
 
-## 4. Exploitation steps
+## 4. Exploitation
 
 1. Log in to Juice Shop (any account).
 2. Open **Customer Feedback → File Complaint** (`/#/complain`).
@@ -78,13 +82,14 @@ The file is ~342 bytes; the parsed structure is gigabytes.
 5. Click **Submit**.
 
 ### Expected result
+
 - The response is **delayed ~2 seconds** while the parser expands the bomb.
 - The server returns **HTTP 503** (resources exhausted / timed out).
 - The **Memory Bomb** challenge is marked solved.
 
 ---
 
-## 5. Why it works
+## 5. Why It Works
 
 YAML anchors (`&name`) and aliases (`*name`) are a legitimate feature for
 reusing data. But a parser that resolves them eagerly and without limits will
