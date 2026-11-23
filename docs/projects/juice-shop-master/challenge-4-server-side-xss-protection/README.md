@@ -15,7 +15,11 @@ mechanism.
 Performed on a local, personal OWASP Juice Shop instance. Never test these techniques on systems you do not own or have explicit permission to test.
 :::
 
-## 1. Why this is the hard XSS challenge
+## 1. Summary
+
+The feedback a customer submits (via the Contact form) is cleaned on the server
+with an HTML sanitizer before being stored and later displayed. A plain
+`<iframe>` is stripped out, so the payload must survive that sanitizer.
 
 Juice Shop has several XSS tiers:
 
@@ -27,13 +31,9 @@ Juice Shop has several XSS tiers:
   the input before storing it. You cannot win by avoiding the frontend; you
   must defeat the server's sanitizer.
 
-The feedback a customer submits (via the Contact form) is cleaned on the server
-with the HTML sanitizer before being stored and later displayed. A clean
-`<iframe>` is stripped out. So the payload must survive that sanitizer.
-
 ---
 
-## 2. The root cause: a masking bypass in sanitize-html 1.4.2
+## 2. Root Cause
 
 The server uses the outdated library **`sanitize-html` version 1.4.2**. This
 version performs sanitization **only once and non-recursively** — it removes the
@@ -45,13 +45,15 @@ checked again. This technique is called **masking**.
 
 ---
 
-## 3. The payload
+## 3. Proof of Concept
+
+### Payload
 
 ```
 <<iframe src="javascript:alert(`xss`)">iframe src="javascript:alert(`xss`)">
 ```
 
-Step-by-step, server side:
+### How the sanitizer processes it
 
 1. Input received:
    `<<iframe src="javascript:alert(`xss`)">iframe src="javascript:alert(`xss`)">`
@@ -66,7 +68,7 @@ Step-by-step, server side:
 
 ---
 
-## 4. Exploitation steps
+## 4. Exploitation
 
 1. Log in to Juice Shop (any account).
 2. Open **Contact** — `http://localhost:3000/#/contact`.
@@ -78,16 +80,27 @@ Step-by-step, server side:
 5. Solve the **CAPTCHA** shown on the form.
 6. Click **Submit**.
 
-The **Server-side XSS Protection** challenge is marked solved: the server
-detects that the XSS payload survived its own sanitization and was persisted.
-Viewing the page that displays customer feedback will trigger the `xss` alert.
+### Expected result
+
+- The **Server-side XSS Protection** challenge is marked solved: the server
+  detects that the XSS payload survived its own sanitization and was persisted.
+- Viewing the page that displays customer feedback triggers the `xss` alert.
 
 > Copy the payload verbatim — it relies on exact backticks and quotes. Changing
 > a single character breaks the masking and the sanitizer will strip it.
 
 ---
 
-## 5. Remediation
+## 5. Why It Works
+
+A single cleaning pass cannot fully remove nested or malformed tags: stripping
+the inner tag *creates* a new valid one that is never re-checked. The result is
+then rendered as raw HTML (`[innerHTML]`), which is the dangerous sink where
+the stored payload finally executes.
+
+---
+
+## 6. Remediation
 
 :::tip Key takeaway
 Validate and restrict untrusted input on the server side; never rely on the client or on outdated components.
@@ -105,7 +118,7 @@ Validate and restrict untrusted input on the server side; never rely on the clie
 
 ---
 
-## 6. Impact
+## 7. Impact
 
 :::danger Why it matters
 See the consequences below: this flaw can seriously affect the availability, integrity or confidentiality of the application.
