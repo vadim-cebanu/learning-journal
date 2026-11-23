@@ -46,6 +46,18 @@ All attacks were carried out on a local, personal OWASP Juice Shop instance, usi
 Challenges 1–3 all abuse the same *File Complaint* upload endpoint, each through a different file type (ZIP, XML, YAML) — a good illustration of how one weak endpoint enables very different attacks.
 :::
 
+## Challenge Write-up Structure
+
+Every challenge follows the same layout:
+
+1. **Summary**
+2. **Root Cause**
+3. **Proof of Concept** (payload, preparation, flow — varies per challenge)
+4. **Exploitation**
+5. **Why It Works**
+6. **Remediation**
+7. **Impact**
+
 ## Documentation Structure
 
 ```
