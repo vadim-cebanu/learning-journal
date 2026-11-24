@@ -1,6 +1,8 @@
 import type {ReactNode} from 'react';
 import Head from '@docusaurus/Head';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Hero from '@site/src/components/hero';
+import {heroData} from '@site/src/data/portfolio';
 
 import styles from './index.module.css';
 
@@ -14,7 +16,7 @@ export default function Home(): ReactNode {
         <meta name="description" content={siteConfig.tagline} />
       </Head>
       <main className={styles.main}>
-        {/* Portfolio sections are added in their own feature branches */}
+        <Hero {...heroData} />
       </main>
     </>
   );
