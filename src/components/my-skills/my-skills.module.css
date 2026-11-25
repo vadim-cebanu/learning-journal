@@ -94,7 +94,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--portfolio-card);
   transform: rotateY(0deg);
   opacity: 1;
   transition: opacity 0s linear 0.3s;
@@ -107,7 +106,7 @@
   justify-content: center;
   gap: 6px;
   padding: 24px 24px 24px 44px;
-    background-color: #2b3646;
+  background-color: #2b3646;
   font-size: 16px;
   line-height: 1.35;
   transform: rotateY(180deg);
