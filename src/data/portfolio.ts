@@ -1,3 +1,5 @@
+import type {NavLink} from '@site/src/components/header';
+
 export interface HeroData {
   name: string;
   title: string;
@@ -14,3 +16,10 @@ export const heroData: HeroData = {
   imageSrc: '/img/profile.jpg',
   imageAlt: 'my image profile',
 };
+
+export const navLinks: NavLink[] = [
+  {label: 'About me', href: '#about'},
+  {label: 'My skills', href: '#skills'},
+  {label: 'My projects', href: '#projects'},
+  {label: 'Contact', href: '#contact'},
+];
