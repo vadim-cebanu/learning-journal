@@ -8,11 +8,19 @@
 
 /* Portfolio design tokens (Figma) */
 :root {
-  --portfolio-primary: #266bdc;
+  --portfolio-primary: #266ad9;
+  --portfolio-accent: #2c46e0;
   --portfolio-dark: #262a33;
+  --portfolio-card: #2b3646;
   --portfolio-light: #ffffff;
-  --portfolio-font: 'Quicksand', sans-serif;
   --points-background: #44555881;
+  --portfolio-font: 'Quicksand', sans-serif;
+  --portfolio-container: 1440px;
+}
+
+/* Smooth scrolling for the navigation links */
+html {
+  scroll-behavior: smooth;
 }
 
 /* You can override the default Infima variables here. */
