@@ -14,10 +14,10 @@ This project is my personal learning journal and portfolio for the DevSecOps tra
   - [GitHub Pages deployment](#github-pages-deployment)
 - [Further References](#further-references)
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+import GithubLinkAdmonition from '@site/src/components/github-link-admonition';
 
 <GithubLinkAdmonition 
-    link="https://github.com/vadim-cebanu/learning-journal"
+    link="https://github.com/vadim-cebanu/portfolio"
     title="Github Tip" 
     type="tip"
 >
@@ -26,7 +26,7 @@ Checkout this repository to see the code/implementation
 
 ## Quickstart
 
-1. Clone the repository: `git clone git@github.com:vadim-cebanu/learning-journal.git`
+1. Clone the repository: `git clone git@github.com:vadim-cebanu/portfolio.git`
 2. Install the dependencies: `npm install`
 3. Copy `example.env` to `.env` and adjust the values if needed
 4. Start the development server: `npm start`

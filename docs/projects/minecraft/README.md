@@ -2,7 +2,7 @@
 
 A self-built Docker image and Docker Compose setup for running the official Minecraft Java Edition server.
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+import GithubLinkAdmonition from '@site/src/components/github-link-admonition';
 
 <GithubLinkAdmonition link="https://github.com/vadim-cebanu/minecraft-server-docker" title="Github Tip" type="tip">
 Checkout this repository to see the code/implementation

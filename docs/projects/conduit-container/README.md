@@ -14,7 +14,7 @@ Only the frontend is published to the outside on port **8282**. nginx forwards a
 
 The purpose of this project is to automate the release process of a containerized application: build and release are separated into two jobs, and every change on `main` is deployed to the VM without manual steps.
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+import GithubLinkAdmonition from '@site/src/components/github-link-admonition';
 
 <GithubLinkAdmonition link="https://github.com/vadim-cebanu/conduit" title="Github Tip" type="tip">
 Checkout this repository to see the code/implementation
