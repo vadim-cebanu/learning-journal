@@ -10,7 +10,7 @@ const blogEnabled = Boolean(process.env.BLOG_ENABLED === 'true')
 const gitRepositoryUrl = process.env.GIT_REPOSITORY_URL ?? 'https://github.com/vadim-cebanu/learning-journal'
 
 const config: Config = {
-  title: 'Learning Journal',
+  title: 'Portfolio',
   tagline: 'DevSecOps Enthusiast with a passion for details and efficiency',
   favicon: 'img/logo.png',
 
@@ -75,7 +75,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Vadim Cebanu — Learning Journal',
+      title: 'Vadim Cebanu — Portfolio',
       logo: {
         alt: 'Vadim Cebanu Logo',
         src: 'img/logo.svg',
