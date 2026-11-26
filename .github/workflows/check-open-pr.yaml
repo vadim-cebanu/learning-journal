@@ -1,11 +1,8 @@
 name: Check open PR for feature branch
 
 on:
-  push:
-    branches-ignore:
-      - main
   pull_request:
-    types: [opened]
+
 
 permissions:
   contents: read
