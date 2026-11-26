@@ -4,7 +4,14 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Header from '@site/src/components/header';
 import Hero from '@site/src/components/hero';
 import MySkills from '@site/src/components/my-skills';
-import {heroData, navLinks, skillsData } from '@site/src/data/portfolio';
+import ProjectHighlights from '@site/src/components/project-highlights';
+import {
+  heroData,
+  moreProjectsUrl,
+  navLinks,
+  projectsData,
+  skillsData,
+} from '@site/src/data/portfolio';
 
 import styles from './index.module.css';
 
@@ -21,6 +28,10 @@ export default function Home(): ReactNode {
       <main className={styles.main}>
         <Hero {...heroData} />
         <MySkills skills={skillsData} />
+        <ProjectHighlights
+          projects={projectsData}
+          moreProjectsUrl={moreProjectsUrl}
+        />
       </main>
     </>
   );

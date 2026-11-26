@@ -1,5 +1,7 @@
 import type {NavLink} from '@site/src/components/header';
 import type {Skill} from '@site/src/components/my-skills';
+import type {Project, ProjectTag} from '@site/src/components/project-highlights';
+
 
 export interface HeroData {
   name: string;
@@ -130,5 +132,83 @@ export const skillsData: Skill[] = [
       'Login security',
       'Implement authentication and authorization mechanisms',
     ],
+  },
+];
+
+function tagsFor(names: string[]): ProjectTag[] {
+  return skillsData
+    .filter((skill) => names.includes(skill.name))
+    .map(({name, icon}) => ({name, icon}));
+}
+
+const projectTags = {
+  html: {name: 'HTML', icon: '/img/tags/html.svg'},
+  css: {name: 'CSS', icon: '/img/tags/css.svg'},
+  staticSite: {name: 'Static site', icon: '/img/tags/static-site.svg'},
+  python: {name: 'Python', icon: '/img/tags/python.svg'},
+  shell: {name: 'Shell scripting', icon: '/img/tags/shell.svg'},
+  yaml: {name: 'Yaml', icon: '/img/tags/yaml.svg'},
+  container: {name: 'Container', icon: '/img/tags/container.svg'},
+  cicd: {name: 'CI/CD', icon: '/img/tags/cicd.svg'},
+  security: {name: 'IT Security', icon: '/img/tags/it-security.svg'},
+} satisfies Record<string, ProjectTag>;
+
+export const moreProjectsUrl = '/docs/projects/overview';
+
+export const projectsData: Project[] = [
+  {
+    id: 'minecraft',
+    title: 'Minecraft',
+    image: '/img/projects/minecraft.svg',
+    imageAlt: 'Minecraft server project',
+    description:
+      'A Minecraft Java Edition server in a self-built Docker image. Docker Compose configures it through a .env file, keeps the world in a persistent volume and restarts it after crashes.',
+    tags: [projectTags.yaml, projectTags.shell, projectTags.security, projectTags.container],
+    docsUrl: '/docs/projects/minecraft',
+    githubUrl: 'https://github.com/vadim-cebanu/minecraft-server-docker/',
+  },
+  {
+    id: 'conduit-container',
+    title: 'Conduit (Container)',
+    image: '/img/projects/conduit-container.svg',
+    imageAlt: 'Conduit container project',
+    description:
+      'A Medium clone with an Angular frontend, Django backend and PostgreSQL. GitHub Actions builds the images, pushes them to GHCR and deploys them to a cloud VM on every push to main.',
+    tags: [projectTags.container, projectTags.yaml, projectTags.cicd, projectTags.security],
+    docsUrl: '/docs/projects/conduit-container',
+    githubUrl: 'https://github.com/vadim-cebanu/conduit',
+  },
+  {
+    id: 'wordpress',
+    title: 'WordPress hosting',
+    image: '/img/projects/wordpress.svg',
+    imageAlt: 'WordPress hosting project',
+    description:
+      'WordPress and MariaDB with Docker Compose, using pinned image versions. Credentials stay in a local .env file, the database is persisted and is not exposed to the host.',
+    tags: [projectTags.container, projectTags.shell, projectTags.yaml, projectTags.security],
+    docsUrl: '/docs/projects/wordpress',
+    githubUrl: 'https://github.com/vadim-cebanu/wordpress',
+  },
+  {
+    id: 'baby-tools',
+    title: 'Baby Tools',
+    image: '/img/projects/baby-tools.svg',
+    imageAlt: 'Baby Tools World shop project',
+    description:
+      'An online shop for baby products built with Django, with categories, product tags, reviews and user accounts. It can be built and run as a Docker image.',
+    tags: [projectTags.python, projectTags.container, projectTags.yaml],
+    docsUrl: '/docs/projects/baby-tools',
+    githubUrl: 'https://github.com/vadim-cebanu/baby-tools',
+  },
+  {
+    id: 'truck-signs-api',
+    title: 'Truck Signs API',
+    image: '/img/projects/truck-signs-api.svg',
+    imageAlt: 'Truck Signs API project',
+    description:
+      'A Django REST Framework backend for an online store selling custom vinyl truck letterings. It runs with SQLite for development or PostgreSQL for production.',
+    tags: [projectTags.python, projectTags.container, projectTags.yaml],
+    docsUrl: '/docs/projects/truck-signs-api',
+    githubUrl: 'https://github.com/vadim-cebanu/truck-signs-api',
   },
 ];
