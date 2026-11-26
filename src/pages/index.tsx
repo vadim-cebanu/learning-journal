@@ -6,6 +6,7 @@ import Hero from '@site/src/components/hero';
 import MySkills from '@site/src/components/my-skills';
 import ProjectHighlights from '@site/src/components/project-highlights';
 import Contact from '@site/src/components/contact';
+import Footer from '@site/src/components/footer';
 
 import {
   heroData,
@@ -13,6 +14,7 @@ import {
   navLinks,
   projectsData,
   skillsData,
+  footerData,
   contactData,
 } from '@site/src/data/portfolio';
 
@@ -37,6 +39,7 @@ export default function Home(): ReactNode {
         />
         <Contact {...contactData} />
       </main>
+        <Footer {...footerData} />
     </>
   );
 }

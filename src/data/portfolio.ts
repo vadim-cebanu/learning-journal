@@ -243,3 +243,8 @@ export const contactData: ContactData = {
     },
   ],
 };
+
+export const footerData = {
+  name: 'Vadim Cebanu',
+  legalNoticeUrl: '/legal-notice',
+};

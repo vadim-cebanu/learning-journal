@@ -1,0 +1,105 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 24px 64px;
+  background-color: var(--portfolio-dark);
+  color: var(--portfolio-light);
+  font-family: var(--portfolio-font);
+  text-align: center;
+}
+
+.toTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 84px;
+  margin-bottom: 80px;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--portfolio-light);
+  border-radius: 999px;
+  color: var(--portfolio-light);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  overflow: hidden;
+}
+
+.toTop:hover {
+  transform: translateY(-4px);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.toTop:focus-visible {
+  outline: 2px solid var(--portfolio-primary);
+  outline-offset: 4px;
+}
+
+.copyright {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.legal {
+  color: var(--portfolio-light);
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.legal:hover {
+  color: var(--portfolio-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  .footer {
+    padding: 80px 24px 48px;
+  }
+
+  .toTop {
+    margin-bottom: 56px;
+  }
+
+  .copyright,
+  .legal {
+    font-size: 18px;
+  }
+}
+
+.arrow {
+  animation: arrowFly 3s ease-in-out infinite;
+}
+
+.toTop:hover .arrow {
+  animation-duration: 1s;
+}
+
+@keyframes arrowFly {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  40% {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
+  41% {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    animation: none;
+  }
+}
