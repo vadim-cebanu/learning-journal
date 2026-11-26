@@ -9,7 +9,7 @@ __Signs for Trucks__ is an online store to buy pre-designed vinyls with custom l
 The store also allows clients to upload their own designs and to customize them on the website as well.
 
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+import GithubLinkAdmonition from '@site/src/components/github-link-admonition';
 
 <GithubLinkAdmonition link="https://github.com/vadim-cebanu/truck-signs-api" title="Github Tip" type="tip">
 Checkout this repository to see the code/implementation

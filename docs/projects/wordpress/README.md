@@ -17,7 +17,7 @@ Docker Compose starts both services in a shared network, makes WordPress availab
 
 The purpose of this project is to describe a complete WordPress setup as code, so it can be started on any machine with Docker in a reproducible way.
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+import GithubLinkAdmonition from '@site/src/components/github-link-admonition';
 
 <GithubLinkAdmonition link="https://github.com/vadim-cebanu/wordpress" title="Github Tip" type="tip">
 Checkout this repository to see the code/implementation

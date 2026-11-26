@@ -9,7 +9,7 @@ The project was developed for educational purposes only and therefore makes no c
 This project assumes you already know the Python programming language.
 :::
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+import GithubLinkAdmonition from '@site/src/components/github-link-admonition';
 
 <GithubLinkAdmonition link="https://github.com/vadim-cebanu/baby-tools" title="Github Tip" type="tip">
 Checkout this repository to see the code/implementation
