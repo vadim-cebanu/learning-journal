@@ -5,12 +5,15 @@ import Header from '@site/src/components/header';
 import Hero from '@site/src/components/hero';
 import MySkills from '@site/src/components/my-skills';
 import ProjectHighlights from '@site/src/components/project-highlights';
+import Contact from '@site/src/components/contact';
+
 import {
   heroData,
   moreProjectsUrl,
   navLinks,
   projectsData,
   skillsData,
+  contactData,
 } from '@site/src/data/portfolio';
 
 import styles from './index.module.css';
@@ -32,6 +35,7 @@ export default function Home(): ReactNode {
           projects={projectsData}
           moreProjectsUrl={moreProjectsUrl}
         />
+        <Contact {...contactData} />
       </main>
     </>
   );

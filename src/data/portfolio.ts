@@ -1,7 +1,7 @@
 import type {NavLink} from '@site/src/components/header';
 import type {Skill} from '@site/src/components/my-skills';
 import type {Project, ProjectTag} from '@site/src/components/project-highlights';
-
+import type {ContactLink} from '@site/src/components/contact';
 
 export interface HeroData {
   name: string;
@@ -212,3 +212,34 @@ export const projectsData: Project[] = [
     githubUrl: 'https://github.com/vadim-cebanu/truck-signs-api',
   },
 ];
+
+export interface ContactData {
+  intro: string;
+  points: string[];
+  callToAction: string;
+  links: ContactLink[];
+}
+
+export const contactData: ContactData = {
+  intro: "I'm currently looking for new opportunities – feel free to reach out!",
+  points: [
+    'Open to roles as a DevSecOps Engineer or Fullstack Developer',
+    'I bring a solid frontend and backend foundation and a strong focus on security and automation',
+    'Happy to contribute to CI/CD, containerization and secure infrastructure in your team',
+    'Open to remote or hybrid work and planning to relocate to the Ostfriesland area',
+  ],
+  callToAction: 'Looking forward to hearing from you!',
+  links: [
+    {
+      label: 'info@vadimcebanu.dev',
+      href: 'mailto:info@vadimcebanu',
+      icon: '/img/contact/mail.svg',
+    },
+    {
+      label: 'Profile Page',
+      href: 'https://www.linkedin.com/in/cebanu-vadim/',
+      icon: '/img/contact/profile.svg',
+      underline: true,
+    },
+  ],
+};
