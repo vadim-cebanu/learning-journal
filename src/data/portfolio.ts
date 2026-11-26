@@ -14,9 +14,9 @@ export interface HeroData {
 export const heroData: HeroData = {
   name: 'Vadim Cebanu',
   title: 'DevSecOps Engineer',
-  description:
-    'My description',
-  imageSrc: '/img/profile.jpg',
+    description:
+    "Coming from frontend and backend development, I know how applications are built – now I make sure they are deployed automatically and run securely.\nMy focus: CI/CD with GitHub Actions, Docker, Linux server hardening and security testing with OWASP Juice Shop.\nI'm constantly learning to keep up with new tools and threats.",
+  imageSrc: '/img/profile.png',
   imageAlt: 'my image profile',
 };
 
