@@ -232,7 +232,7 @@ export const contactData: ContactData = {
   links: [
     {
       label: 'info@vadimcebanu.dev',
-      href: 'mailto:info@vadimcebanu',
+      href: 'mailto:info@vadimcebanu.dev',
       icon: '/img/contact/mail.svg',
     },
     {
