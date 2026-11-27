@@ -88,7 +88,6 @@
   }
 
   .list {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -97,15 +96,24 @@
     align-items: center;
     gap: 24px;
     padding: 24px 0 32px;
-    background-color: var(--portfolio-primary);
+    background-color: var(--portfolio-light);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+    transition: clip-path 0.3s ease, visibility 0.3s;
   }
 
   .list.listOpen {
-    display: flex;
+    clip-path: inset(0 0 -24px 0);
+    visibility: visible;
   }
 
   .link {
+    color: var(--portfolio-primary);
     font-size: 20px;
+  }
+
+  .link:hover {
+    color: var(--portfolio-primary);
   }
 }
